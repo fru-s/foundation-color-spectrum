@@ -4,7 +4,7 @@
  
 Data analytics capstone project (Spiced Academy, 2026): a color analysis of 6,761 foundation shades sold at Sephora and Ulta (2021), by depth, undertone and price.
 
-**[View the interactive Tableau story](https://public.tableau.com:9443/views/foundation_color_spectrum/Story1_1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
+**[View the interactive Tableau story](https://public.tableau.com/app/profile/fruzsina.sari/viz/foundation_color_spectrum/Story1_1)**
  
 ![All 6,761 shades, each dot in its real color](03_tableau/images/color_map_all.png)
  
