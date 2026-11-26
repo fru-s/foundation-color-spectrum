@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_products
+    description: One row per product, from int_shades (shade count, L* range, Monk tones, undertone claims) joined to int_prices (price, size, price per unit; empty where unmatched). Product type and price tier still to come.
+    columns:
+      - name: product_key
+        data_tests:
+          - not_null
+          - unique
+      - name: shade_count
+        data_tests:
+          - not_null
+      - name: price_band
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['budget', 'mid-range', 'premium', 'unknown']

@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_ulta
+    description: One row per Ulta product, from raw.ulta; all columns, price, ratings and counts cast to numbers.
+    columns:
+      - name: product_url
+        description: Product link; joins to mapping_prices.shop_key. 87 links appear 2-3 times (same product collected more than once; price and name identical in every copy); duplicates are removed in intermediate.
+        data_tests:
+          - not_null
+          - unique:
+              config:
+                severity: warn
+      - name: price_usd
+        data_tests:
+          - not_null
+      - name: product_description
+        description: Starts with website viewer text ("Use the following zoom..."); useful product info (size, coverage, item number) comes after it.
+      - name: review_star_1
+        description: Star breakdown columns (review_star_1 to 5, rating_star_1 to 5) look scrambled for some products; don't use without checking.

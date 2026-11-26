@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_mapping_prices
+    description: One row per matched shades product (174), from raw.mapping_prices (notebook 02); links each product to its price in stg_ulta or stg_sephora.
+    columns:
+      - name: product_url
+        description: Product link from the shades data; one row per product. 2 products (Age Defense BB Cream, Mini Hello Happy) aren't in stg_shades anymore; notebook 03 removed them with the fewer-than-3-shades rule (1 and 2 shades) after the mapping was built.
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_shades')
+                field: product_url
+              config:
+                severity: warn
+      - name: shop_key
+        description: Ulta rows hold the Ulta product link, Sephora rows the Sephora product_id.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_ulta')
+                field: product_url
+              config:
+                where: "price_retailer = 'ulta'"
+          - relationships:
+              arguments:
+                to: ref('stg_sephora')
+                field: product_id
+              config:
+                where: "price_retailer = 'sephora'"
+      - name: price_retailer
+        description: Shop the price comes from; can differ from product_retailer (e.g. a Sephora product priced at Ulta).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['ulta', 'sephora']
+      - name: match_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['name', 'id', 'fuzzy']

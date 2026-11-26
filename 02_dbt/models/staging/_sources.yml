@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: Raw tables loaded by notebook 04_load_to_postgres; every column is text.
+    tables:
+      - name: shades
+        description: Foundation shades with the color conversion from notebook 03.
+      - name: ulta
+        description: Ulta product data, as downloaded.
+      - name: sephora
+        description: Sephora product data, as downloaded.
+      - name: mapping_prices
+        description: Matching table from notebook 02, linking shade products to shop products.
+      - name: undertone_lookup
+        description: Undertone brand term and source per shade_key, from notebook 05_vocabulary.

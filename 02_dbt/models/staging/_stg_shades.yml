@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_shades
+    description: One row per foundation shade, from raw.shades; all columns, renamed to snake_case, color values cast to numbers.
+    columns:
+      - name: brand_name
+        data_tests:
+          - not_null
+      - name: product_name
+        data_tests:
+          - not_null
+      - name: product_url
+        description: Product link; joins to mapping_prices.
+        data_tests:
+          - not_null
+      - name: hex_final
+        description: Corrected hex code from notebook 03; use this one, not hex_original.
+        data_tests:
+          - not_null
+      - name: l_star
+        data_tests:
+          - not_null
+      - name: a_star
+        data_tests:
+          - not_null
+      - name: b_star
+        data_tests:
+          - not_null
+      - name: chroma
+        data_tests:
+          - not_null
+      - name: monk_tone
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                quote: false

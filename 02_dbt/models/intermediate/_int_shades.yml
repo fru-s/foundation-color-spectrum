@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_shades
+    description: One row per shade; duplicates (12), travel sizes (2 Tarte products) and mixers/pigments removed; shade and product keys, hue angle, undertone brand term and source (from raw.undertone_lookup), olive flag.
+    columns:
+      - name: shade_key
+        data_tests:
+          - not_null
+          - unique
+      - name: product_key
+        data_tests:
+          - not_null
+      - name: undertone_source
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['phrase', 'word', 'code', 'none']
+      - name: undertone_label
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['cool', 'cool neutral', 'neutral', 'warm neutral', 'warm', 'unlabelled']

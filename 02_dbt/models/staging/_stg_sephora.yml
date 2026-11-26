@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_sephora
+    description: One row per Sephora product, from raw.sephora; all columns, prices, ratings and counts cast to numbers, flags to true/false. Mini Size products are still in; they're filtered out in intermediate.
+    columns:
+      - name: product_id
+        description: Sephora product ID; possible join key to mapping_prices.
+        data_tests:
+          - not_null
+          - unique
+      - name: price_usd
+        description: Regular (list) price, the one used for the price analysis.
+        data_tests:
+          - not_null

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: One row per product (309); everything describing it, incl. price, price per unit and price band.
+    columns:
+      - name: product_key
+        data_tests:
+          - not_null
+          - unique
+
+  - name: fct_shades
+    description: One row per shade (6,761); color measures, Monk tone, undertone label and olive flag; links to dim_products by product_key.
+    columns:
+      - name: shade_key
+        data_tests:
+          - not_null
+          - unique
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_key
+
+  - name: mart_monk_availability
+    description: One row per brand and Monk tone (103 brands x 10 tones = 1,030 rows), with 0 where a brand offers no shade in that tone.

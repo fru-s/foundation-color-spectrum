@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_prices
+    description: One row per matched product with its price; Ulta deduplicated per link, Sephora minis excluded. Still includes the 2 products removed from the shades (they drop out in int_products).
+    columns:
+      - name: product_key
+        description: md5 of the shades product_url; links to int_shades and int_products.
+        data_tests:
+          - not_null
+          - unique
+      - name: price_usd
+        data_tests:
+          - not_null
